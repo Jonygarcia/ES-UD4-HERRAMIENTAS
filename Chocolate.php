@@ -29,7 +29,7 @@ class Chocolate extends Dulce
     function muestraResumen()
     {
         return parent::muestraResumen() .
-            "Porcentaje de Cacao: " . $this->porcentajeCacao . "<br>
-            Peso: " . $this->peso . "<br>";
+            "Porcentaje de Cacao: " . $this->porcentajeCacao . "%<br>
+            Peso: " . $this->peso . "gr<br>";
     }
 }
