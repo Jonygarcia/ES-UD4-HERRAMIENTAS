@@ -50,11 +50,14 @@ class Cliente
 
     public function listarPedidos()
     {
+        //* He cambiado la función de void a String para poder llamarla desde muestraResumen y no descuadre todo al mostrarlo.
         $str = "Has realizado " . $this->numPedidosEfectuados . " pedidos:";
 
         foreach ($this->dulcesComprados as $d) {
             $str .= "<br>- " . $d->nombre;
         }
+
+        return $str;
     }
 
     public function muestraResumen()
