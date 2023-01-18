@@ -12,8 +12,6 @@ class Chocolate extends Dulce
         private $peso
     ) {
         parent::__construct($nombre, $numero, $precio);
-        $this->porcentajeCacao = $porcentajeCacao;
-        $this->peso = $peso;
     }
 
     public function getPorcentajeCacao()

@@ -13,10 +13,6 @@ class Tarta extends Dulce
         private $maxNumComensales
     ) {
         parent::__construct($nombre, $numero, $precio);
-        $this->numPisos = $numPisos;
-        $this->rellenos = $rellenos;
-        $this->minNumComensales = $minNumComensales;
-        $this->maxNumComensales = $maxNumComensales;
     }
 
     public function getNumPisos()

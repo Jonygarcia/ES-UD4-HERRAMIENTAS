@@ -4,7 +4,7 @@ include_once "Dulces.php";
 class Cliente
 {
     private $dulcesComprados = [];
-    private $numDulcesComprados;
+
     function __construct(
         public $nombre,
         private $numero,
@@ -15,11 +15,6 @@ class Cliente
     public function getDulcesComprados()
     {
         return $this->dulcesComprados;
-    }
-
-    public function getNumDulcesComprados()
-    {
-        return $this->numDulcesComprados;
     }
 
     public function getNumero()
@@ -35,27 +30,17 @@ class Cliente
     public function comprar(Dulce $dulce): bool
     {
 
-        if(in_array($dulce, $this->dulcesComprados)){
-            foreach ($this->dulcesComprados as $d => $cant) {
-                if ($d == $dulce)
-                    $cant += 1;
-            }
+        array_push($this->dulcesComprados, $dulce);
+        $this->numPedidosEfectuados++;
 
-            echo "Has comprado una unidad más de " . $dulce->nombre;
-            $this->numDulcesComprados += 1;
-        } else {
-
-            array_push($this->dulcesComprados, $dulce);
-
-            echo "Has comprado una unidad de " . $dulce->nombre;
-            $this->numDulcesComprados += 1;
-        }
-
-        return true;
+        return in_array($dulce, $this->dulcesComprados);
     }
 
     public function valorar(Dulce $dulce, string $comentario)
     {
+        echo ($this->listaDeDulces($dulce)) ?
+            "Se ha publicado su valoración con éxito" :
+            "El dulce que desea valorar no lo has comprado aún";
     }
 
     public function listaDeDulces(Dulce $dulce): bool
@@ -65,5 +50,17 @@ class Cliente
 
     public function listarPedidos()
     {
+        $str = "Has realizado " . $this->numPedidosEfectuados . " pedidos:";
+
+        foreach ($this->dulcesComprados as $d) {
+            $str .= "<br>- " . $d->nombre;
+        }
+    }
+
+    public function muestraResumen()
+    {
+        return "</br><strong>" . $this->nombre . "</strong><br>
+            Número: " . $this->numero . "<br>" .
+            $this->listarPedidos();
     }
 }

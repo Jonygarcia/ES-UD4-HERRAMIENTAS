@@ -2,7 +2,6 @@
 
 class Dulce
 {
-
     private const IVA = 0.21;
 
     function __construct(
@@ -10,9 +9,6 @@ class Dulce
         protected $numero,
         private $precio
     ) {
-        $this->nombre = $nombre;
-        $this->numero = $numero;
-        $this->precio = $precio;
     }
 
     public function getNumero()
