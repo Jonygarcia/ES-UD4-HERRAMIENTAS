@@ -1,5 +1,5 @@
 <?php
-include_once "Tarta.php";
+include_once "app/Tarta.php";
 
 $rellenos = ["Negro", "Avellana", "Blanco"];
 $tarta = new Tarta("Tres chocolates", 4, 8.50, 3, $rellenos, 2, 4);

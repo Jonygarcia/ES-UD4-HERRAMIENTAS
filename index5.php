@@ -1,6 +1,5 @@
 <?php
-include_once "Cliente.php";
-include_once "Pasteleria.php";
+include_once "app/Pasteleria.php";
 
 $gorditos = new Pasteleria("Gorditos");
 

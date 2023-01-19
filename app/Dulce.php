@@ -1,6 +1,7 @@
 <?php
+include_once "Resumible.php";
 
-class Dulce
+abstract class Dulce implements Resumible
 {
     private const IVA = 0.21;
 

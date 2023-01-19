@@ -2,6 +2,10 @@
 include_once "Chocolate.php";
 include_once "Bollo.php";
 include_once "Tarta.php";
+include_once "Cliente.php";
+include_once "./util/ClienteNoEncontradoException.php";
+include_once "./util/DulceNoEncontradoException.php";
+include_once "./util/DulceNoCompradoException.php";
 
 class Pasteleria
 {
@@ -79,23 +83,37 @@ class Pasteleria
 
     public function comprarClienteProducto($numeroCliente, $numeroDulce)
     {
-        foreach ($this->clientes as $cliente) {
-            if ($cliente->getNumero() == $numeroCliente) {
-                foreach ($this->productos as $producto) {
-                    if ($producto->getNumero() == $numeroDulce) {
-                        if ($cliente->comprar($producto)) {
-                            echo "<br>La compra de " . $producto->nombre . " se ha realizado correctamente<br>";
-                        } else {
-                            echo "<br>No se ha podido realizar la compra de " . $producto->nombre . "<br>";
+        try {
+            $saveCliente = "";
+            $saveProducto = "";
+
+            foreach ($this->clientes as $cliente) {
+                if ($cliente->getNumero() == $numeroCliente) {
+                    $saveCliente = $cliente;
+                    try {
+                        foreach ($this->productos as $producto) {
+                            if ($producto->getNumero() == $numeroDulce) {
+                                $saveProducto = $producto;
+                                $cliente->comprar($producto);
+                                return $this;
+                            }
                         }
-                        return $this;
+                    } catch (DulceNoCompradoException $e) {
+                        echo $e->getMensaje();
                     }
                 }
-                echo "<br>El producto que ha intentado comprar no existe<br>";
-                return $this;
             }
+
+            if ($saveCliente === "") {
+                throw new ClienteNoEncontradoException("El número no coincide con ninguno de los clientes registrados<br>");
+            } else if ($saveProducto === "") {
+                throw new DulceNoEncontradoException("El número no coincide con ninguno de los dulces registrados<br>");
+            }
+        } catch (ClienteNoEncontradoException $e) {
+            echo $e->getMensaje();
+        } catch (DulceNoEncontradoException $e) {
+            echo $e->getMensaje();
         }
-        echo "<br>El cliente seleccionado no existe<br>";
         return $this;
     }
 }

@@ -1,5 +1,5 @@
 <?php
-include_once "Dulces.php";
+include_once "Dulce.php";
 
 class Bollo extends Dulce
 {
