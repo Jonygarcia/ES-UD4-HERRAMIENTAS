@@ -1,0 +1,6 @@
+[2023-01-24T17:18:35.915152+01:00] miApp.INFO: Se ha creado el cliente  ["Juan"] []
+[2023-01-24T17:18:35.917853+01:00] miApp.INFO: Se ha creado el producto  ["Belga"] []
+[2023-01-24T17:18:35.917990+01:00] miApp.INFO: Se ha creado el producto  ["Bollycao"] []
+[2023-01-24T17:18:35.918076+01:00] miApp.INFO: Se ha creado el producto  ["Tres chocolates"] []
+[2023-01-24T17:18:35.918189+01:00] miApp.WARNING: No se ha encontrado el cliente  [1] []
+[2023-01-24T17:18:35.918283+01:00] miApp.WARNING: No se ha encontrado el producto  [4] []

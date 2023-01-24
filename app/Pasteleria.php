@@ -1,4 +1,8 @@
 <?php
+
+use Monolog\Logger;
+use util\LogFactory;
+
 include_once "Chocolate.php";
 include_once "Bollo.php";
 include_once "Tarta.php";
@@ -6,6 +10,7 @@ include_once "Cliente.php";
 include_once "./util/ClienteNoEncontradoException.php";
 include_once "./util/DulceNoEncontradoException.php";
 include_once "./util/DulceNoCompradoException.php";
+include_once "./util/LogFactory.php";
 
 class Pasteleria
 {
@@ -14,10 +19,12 @@ class Pasteleria
     private $numProductos = 0;
     private $clientes = [];
     private $numClientes = 0;
+    private Logger $log;
 
     function __construct(
         private $nombre
     ) {
+        $this->log = LogFactory::getLogger();
     }
 
     public function getNombre()
@@ -33,6 +40,7 @@ class Pasteleria
     private function incluirProducto(Dulce $prod)
     {
         array_push($this->productos, $prod);
+        $this->log->info("Se ha creado el producto ", [$prod->nombre]);
     }
 
     public function incluirTarta($nombre, $precio, $numPisos, $rellenos, $minC, $maxC)
@@ -60,6 +68,7 @@ class Pasteleria
     {
         $cliente = new Cliente($nombre, $this->numClientes);
         $this->numClientes++;
+        $this->log->info("Se ha creado el cliente ", [$nombre]);
         array_push($this->clientes, $cliente);
     }
 
@@ -105,8 +114,10 @@ class Pasteleria
             }
 
             if ($saveCliente === "") {
+                $this->log->warning("No se ha encontrado el cliente ", [$numeroCliente]);
                 throw new ClienteNoEncontradoException("El número no coincide con ninguno de los clientes registrados<br>");
             } else if ($saveProducto === "") {
+                $this->log->warning("No se ha encontrado el producto ", [$numeroDulce]);
                 throw new DulceNoEncontradoException("El número no coincide con ninguno de los dulces registrados<br>");
             }
         } catch (ClienteNoEncontradoException $e) {
